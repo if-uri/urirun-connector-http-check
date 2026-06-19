@@ -7,7 +7,7 @@ import urllib.request
 from importlib import resources
 from typing import Any
 
-from urirun import v2
+import urirun
 
 
 ROUTE_HTTP_STATUS = "httpcheck://host/http/query/status"
@@ -26,7 +26,7 @@ def connector_manifest() -> dict[str, Any]:
     return _json_resource("connector.manifest.json")
 
 
-@v2.uri_command(
+@urirun.command(
     ROUTE_HTTP_STATUS,
     meta={
         "label": "Check HTTP status",
@@ -47,7 +47,7 @@ def status_command(url: str, expectStatus: int = 200, timeout: float = 10.0) -> 
 
 
 def urirun_bindings() -> dict[str, Any]:
-    return v2.connector_bindings(connector=CONNECTOR_ID)
+    return urirun.connector_bindings(connector=CONNECTOR_ID)
 
 
 def check_url(url: str, timeout: float = 10.0, expect_status: int | None = None) -> dict[str, Any]:

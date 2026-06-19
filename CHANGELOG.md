@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-06-20
+
+### Changed
+- Prefer the public `@urirun.command(...)` decorator in connector code and docs.
+- Require `urirun` `v0.3.12`, where the top-level decorator API is available.
+
 ## [0.1.2] - 2026-06-20
 
 ### Changed

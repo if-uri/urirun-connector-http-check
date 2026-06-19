@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 
+import urirun
 from urirun import v2
 from urirun_connector_http_check import connector_manifest, urirun_bindings
 from urirun_connector_http_check.cli import main
@@ -39,7 +40,7 @@ def test_bindings_are_json_serializable_and_compile() -> None:
 
 
 def test_bindings_export_only_this_connector_routes() -> None:
-    @v2.uri_command("other://local/example/run")
+    @urirun.command("other://local/example/run")
     def other_command(name: str) -> list[str]:
         return ["echo", "{name}"]
 
