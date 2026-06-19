@@ -78,3 +78,19 @@ The connector has been tested from a clean virtualenv by:
 - running the direct CLI against `https://ifuri.com`,
 - compiling the package bindings into a registry,
 - executing `httpcheck://host/http/query/status` through `urirun run`.
+
+## Docker verification
+
+Run the connector in an isolated Docker network with a local nginx target:
+
+```bash
+make docker-test
+```
+
+The Docker smoke test verifies:
+
+- direct CLI execution,
+- registry compilation,
+- `urirun run httpcheck://host/http/query/status`,
+- MCP tools projection,
+- A2A card projection.

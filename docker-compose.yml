@@ -1,0 +1,19 @@
+services:
+  target-site:
+    image: nginx:1.27-alpine
+    volumes:
+      - ./docker/site:/usr/share/nginx/html:ro
+    networks: [connector-test]
+
+  tester:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      TARGET_URL: http://target-site/
+    depends_on:
+      - target-site
+    networks: [connector-test]
+
+networks:
+  connector-test:

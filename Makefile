@@ -13,3 +13,8 @@ smoke: ## Run CLI smoke check against ifuri.com
 .PHONY: manifest
 manifest: ## Print connector manifest
 	python3 -m urirun_connector_http_check.cli manifest
+
+.PHONY: docker-test
+docker-test: ## Run connector in Docker against a network target plus MCP/A2A projection
+	docker compose up --build --abort-on-container-exit --exit-code-from tester
+	docker compose down -v --remove-orphans

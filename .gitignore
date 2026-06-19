@@ -8,3 +8,4 @@ build/
 .urirun/
 .code2llm_cache
 .idea
+.docker-smoke/
