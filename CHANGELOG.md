@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased] - 2026-06-19
+
+### Documentation
+- Link the connector README to the public hub page, machine manifest and central
+  docs.
+- Document the public `connect.ifuri.com` installer path and verified
+  end-to-end `urirun run` flow.
+
 ## [0.1.10] - 2026-06-19
 
 ### Fixed

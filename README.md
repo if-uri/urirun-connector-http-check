@@ -3,10 +3,23 @@
 Small ifuri/urirun connector that checks HTTP endpoints and exposes the action
 as a package, CLI and URI binding.
 
+## Documentation
+
+- Hub page: [connect.ifuri.com/connectors/http-check](https://connect.ifuri.com/connectors/http-check)
+- Machine manifest: [connect.ifuri.com/connectors/http-check.json](https://connect.ifuri.com/connectors/http-check.json)
+- Connector docs: [docs.ifuri.com/connectors.html](https://docs.ifuri.com/connectors.html)
+- Registry model: [docs.ifuri.com/registry-and-bindings.html](https://docs.ifuri.com/registry-and-bindings.html)
+
 ## Install from GitHub
 
 ```bash
 python3 -m pip install "git+https://github.com/if-uri/urirun-connector-http-check.git@main"
+```
+
+Or install through the public connector hub:
+
+```bash
+curl -fsSL 'https://connect.ifuri.com/install?connectors=http-check' | bash
 ```
 
 ## CLI
@@ -56,3 +69,12 @@ urirun run cli://urirun-connector-http-check/urirun-http-check/run cli-registry.
   --execute \
   --allow 'cli://urirun-connector-http-check/*'
 ```
+
+## Public verification
+
+The connector has been tested from a clean virtualenv by:
+
+- installing `urirun` and this connector through `https://connect.ifuri.com/install?connectors=http-check`,
+- running the direct CLI against `https://ifuri.com`,
+- compiling the package bindings into a registry,
+- executing `httpcheck://host/http/query/status` through `urirun run`.
