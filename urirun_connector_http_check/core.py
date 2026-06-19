@@ -12,7 +12,6 @@ from urirun import v2
 
 ROUTE_HTTP_STATUS = "httpcheck://host/http/query/status"
 CONNECTOR_ID = "http-check"
-CONNECTOR_ROUTES = {ROUTE_HTTP_STATUS}
 
 
 def _json_resource(name: str) -> dict[str, Any]:
@@ -47,24 +46,8 @@ def status_command(url: str, expectStatus: int = 200, timeout: float = 10.0) -> 
     ]
 
 
-def _decorated_bindings_as_document() -> dict[str, Any]:
-    expanded = v2.expand_bindings(v2.decorated_bindings())["bindings"]
-    bindings: dict[str, dict[str, Any]] = {}
-    for entry in expanded:
-        uri = entry["uri"]
-        if uri not in CONNECTOR_ROUTES:
-            continue
-        binding = {key: value for key, value in entry.items() if key != "config"}
-        binding.update(entry.get("config") or {})
-        schema = binding.get("inputSchema")
-        if isinstance(schema, dict):
-            schema.setdefault("additionalProperties", False)
-        bindings[uri] = binding
-    return {"version": v2.VERSION, "bindings": bindings}
-
-
 def urirun_bindings() -> dict[str, Any]:
-    return _decorated_bindings_as_document()
+    return v2.connector_bindings(connector=CONNECTOR_ID)
 
 
 def check_url(url: str, timeout: float = 10.0, expect_status: int | None = None) -> dict[str, Any]:
