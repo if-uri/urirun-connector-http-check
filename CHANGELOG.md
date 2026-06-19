@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-06-20
+
+### Changed
+- Pin the urirun runtime dependency to the corrected release tag `v0.3.11`.
+
 ## [0.1.1] - 2026-06-20
 
 ### Changed
