@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased] - 2026-06-19
+## [Unreleased]
+
+## [0.1.1] - 2026-06-20
 
 ### Changed
 - Generate the `httpcheck://host/http/query/status` binding from a
