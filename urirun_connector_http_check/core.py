@@ -7,6 +7,13 @@ import urllib.request
 from importlib import resources
 from typing import Any
 
+from urirun import v2
+
+
+ROUTE_HTTP_STATUS = "httpcheck://host/http/query/status"
+CONNECTOR_ID = "http-check"
+CONNECTOR_ROUTES = {ROUTE_HTTP_STATUS}
+
 
 def _json_resource(name: str) -> dict[str, Any]:
     text = resources.files(__package__).joinpath(name).read_text(encoding="utf-8")
@@ -20,8 +27,44 @@ def connector_manifest() -> dict[str, Any]:
     return _json_resource("connector.manifest.json")
 
 
+@v2.uri_command(
+    ROUTE_HTTP_STATUS,
+    meta={
+        "label": "Check HTTP status",
+        "connector": CONNECTOR_ID,
+    },
+)
+def status_command(url: str, expectStatus: int = 200, timeout: float = 10.0) -> list[str]:
+    """Declare the URI binding once, using the function signature as schema."""
+    return [
+        "urirun-http-check",
+        "status",
+        "{url}",
+        "--expect-status",
+        "{expectStatus}",
+        "--timeout",
+        "{timeout}",
+    ]
+
+
+def _decorated_bindings_as_document() -> dict[str, Any]:
+    expanded = v2.expand_bindings(v2.decorated_bindings())["bindings"]
+    bindings: dict[str, dict[str, Any]] = {}
+    for entry in expanded:
+        uri = entry["uri"]
+        if uri not in CONNECTOR_ROUTES:
+            continue
+        binding = {key: value for key, value in entry.items() if key != "config"}
+        binding.update(entry.get("config") or {})
+        schema = binding.get("inputSchema")
+        if isinstance(schema, dict):
+            schema.setdefault("additionalProperties", False)
+        bindings[uri] = binding
+    return {"version": v2.VERSION, "bindings": bindings}
+
+
 def urirun_bindings() -> dict[str, Any]:
-    return _json_resource("urirun.bindings.v2.json")
+    return _decorated_bindings_as_document()
 
 
 def check_url(url: str, timeout: float = 10.0, expect_status: int | None = None) -> dict[str, Any]:

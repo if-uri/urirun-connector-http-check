@@ -2,6 +2,13 @@
 
 ## [Unreleased] - 2026-06-19
 
+### Changed
+- Generate the `httpcheck://host/http/query/status` binding from a
+  `@urirun.v2.uri_command` decorated function instead of maintaining a
+  hand-written `urirun.bindings.v2.json` file.
+- Declare `urirun` as an explicit package dependency so the connector can be
+  installed and used directly from GitHub.
+
 ### Documentation
 - Link the connector README to the public hub page, machine manifest and central
   docs.

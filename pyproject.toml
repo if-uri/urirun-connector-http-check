@@ -10,7 +10,9 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
 authors = [{ name = "if-uri" }]
-dependencies = []
+dependencies = [
+  "urirun @ git+https://github.com/tellmesh/urirun.git@main#subdirectory=adapters/python",
+]
 
 [project.urls]
 Homepage = "https://connect.ifuri.com/connectors/http-check"
@@ -24,4 +26,4 @@ where = ["."]
 include = ["urirun_connector_http_check*"]
 
 [tool.setuptools.package-data]
-urirun_connector_http_check = ["connector.manifest.json", "urirun.bindings.v2.json"]
+urirun_connector_http_check = ["connector.manifest.json"]

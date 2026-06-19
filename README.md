@@ -3,6 +3,10 @@
 Small ifuri/urirun connector that checks HTTP endpoints and exposes the action
 as a package, CLI and URI binding.
 
+The URI binding is generated from a decorated Python function, so the command
+template and JSON Schema stay in one place instead of being duplicated in a
+hand-written bindings file.
+
 ## Documentation
 
 - Hub page: [connect.ifuri.com/connectors/http-check](https://connect.ifuri.com/connectors/http-check)
@@ -41,9 +45,23 @@ Primary route:
 httpcheck://host/http/query/status
 ```
 
-The package also ships `urirun.bindings.v2.json`, so `urirun scan` or
-`python -m urirun.v2_adopt add-python-package urirun-connector-http-check` can
-adopt the console script into a registry.
+The package exposes `urirun_bindings()`, generated from `@urirun.v2.uri_command`.
+The function signature becomes the JSON Schema and the function body returns the
+argv template:
+
+```python
+from urirun import v2
+
+@v2.uri_command("httpcheck://host/http/query/status")
+def status_command(url: str, expectStatus: int = 200, timeout: float = 10.0):
+    return [
+        "urirun-http-check", "status", "{url}",
+        "--expect-status", "{expectStatus}",
+        "--timeout", "{timeout}",
+    ]
+```
+
+Generate bindings and compile them into a registry:
 
 ```bash
 python - <<'PY' > bindings.json
