@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-06-20
+
+### Changed
+- Use `urirun.connector(...)` in connector code and docs so connector id,
+  default URI target and binding export are declared once.
+- Require `urirun` `v0.3.13`, where the connector helper is available.
+
 ## [0.1.3] - 2026-06-20
 
 ### Changed

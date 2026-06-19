@@ -17,7 +17,7 @@ hand-written bindings file.
 ## Install from GitHub
 
 ```bash
-python3 -m pip install "git+https://github.com/if-uri/urirun-connector-http-check.git@v0.1.3"
+python3 -m pip install "git+https://github.com/if-uri/urirun-connector-http-check.git@v0.1.4"
 ```
 
 Or install through the public connector hub:
@@ -45,14 +45,17 @@ Primary route:
 httpcheck://host/http/query/status
 ```
 
-The package exposes `urirun_bindings()`, generated from `@urirun.command`.
-The function signature becomes the JSON Schema and the function body returns the
-argv template:
+The package exposes `urirun_bindings()`, generated from a connector-local
+decorator. The connector id and URI scheme are declared once; the function
+signature becomes the JSON Schema and the function body returns the argv
+template:
 
 ```python
 import urirun
 
-@urirun.command("httpcheck://host/http/query/status")
+connector = urirun.connector("http-check", scheme="httpcheck")
+
+@connector.command("http/query/status")
 def status_command(url: str, expectStatus: int = 200, timeout: float = 10.0):
     return [
         "urirun-http-check", "status", "{url}",
