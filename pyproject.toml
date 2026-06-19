@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "urirun-connector-http-check"
+version = "0.1.0"
+description = "HTTP status check connector for ifuri and urirun"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+authors = [{ name = "if-uri" }]
+dependencies = []
+
+[project.urls]
+Homepage = "https://connect.ifuri.com/connectors/http-check"
+Repository = "https://github.com/if-uri/urirun-connector-http-check"
+
+[project.scripts]
+urirun-http-check = "urirun_connector_http_check.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["urirun_connector_http_check*"]
+
+[tool.setuptools.package-data]
+urirun_connector_http_check = ["connector.manifest.json", "urirun.bindings.v2.json"]
