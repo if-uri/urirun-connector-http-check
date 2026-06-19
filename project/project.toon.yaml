@@ -1,0 +1,26 @@
+# urirun-connector-http-check | 6 func | 2f | 317L | python | 2026-06-19
+# generated in 0.00s
+
+HEALTH:
+  CC̄=2.7  critical=0 (limit:10)  dup=0  cycles=0
+
+ALERTS[1]:
+  !   high_fan_out     check_url = 13 (limit:10)
+
+MODULES[9] (top by size):
+  M[urirun_connector_http_check/core.py] 66L C:0 F:4 CC↑6 D:1 (python)
+  M[project.sh] 63L C:0 F:0 CC↑0 D:0 (shell)
+  M[urirun_connector_http_check/connector.manifest.json] 56L C:0 F:0 CC↑0 D:0 (json)
+  M[urirun_connector_http_check/urirun.bindings.v2.json] 43L C:0 F:0 CC↑0 D:0 (json)
+  M[urirun_connector_http_check/cli.py] 41L C:0 F:2 CC↑5 D:0 (python)
+  M[pyproject.toml] 27L C:0 F:0 CC↑0 D:0 (toml)
+  M[Makefile] 15L C:0 F:0 CC↑0 D:0 ()
+  M[urirun_connector_http_check/__init__.py] 5L C:0 F:0 CC↑0 D:0 (python)
+  M[tree.sh] 1L C:0 F:0 CC↑0 D:0 (shell)
+  LANGS: python:3/shell:2/json:2/other:1/toml:1
+
+HOTSPOTS[1]:
+  ★ check_url fan=13  // Orchestrates 13 calls
+
+EVOLUTION:
+  2026-06-19 CC̄=2.7 crit=0 317L // Automated analysis

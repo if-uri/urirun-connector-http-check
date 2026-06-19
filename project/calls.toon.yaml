@@ -1,0 +1,30 @@
+# code2llm call graph | /home/tom/github/if-uri/urirun-connector-http-check
+# generated in 0.00s
+# nodes: 5 | edges: 3 | modules: 2
+# CC̄=2.7
+
+HUBS[20]:
+  urirun_connector_http_check.core.check_url
+    CC=6  in:1  out:19  total:20
+  urirun_connector_http_check.cli.main
+    CC=5  in:0  out:15  total:15
+  urirun_connector_http_check.core._json_resource
+    CC=2  in:2  out:6  total:8
+  urirun_connector_http_check.core.connector_manifest
+    CC=1  in:1  out:1  total:2
+  urirun_connector_http_check.core.urirun_bindings
+    CC=1  in:1  out:1  total:2
+
+MODULES:
+  urirun_connector_http_check.cli  [1 funcs]
+    main  CC=5  out:15
+  urirun_connector_http_check.core  [4 funcs]
+    _json_resource  CC=2  out:6
+    check_url  CC=6  out:19
+    connector_manifest  CC=1  out:1
+    urirun_bindings  CC=1  out:1
+
+EDGES:
+  urirun_connector_http_check.cli.main → urirun_connector_http_check.core.check_url
+  urirun_connector_http_check.core.connector_manifest → urirun_connector_http_check.core._json_resource
+  urirun_connector_http_check.core.urirun_bindings → urirun_connector_http_check.core._json_resource

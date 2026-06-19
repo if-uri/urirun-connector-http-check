@@ -1,0 +1,17 @@
+flowchart TD
+%% generated in 0.00s
+
+    %% Entry points (blue)
+    classDef entry fill:#4dabf7,stroke:#1971c2,color:#fff
+
+    subgraph CLI
+        urirun_connector_http_check__cli__emit["emit"]
+        urirun_connector_http_check__cli__main["main"]
+    end
+
+    subgraph Core
+        urirun_connector_http_check__core___json_resource["_json_resource"]
+        urirun_connector_http_check__core__connector_manifest["connector_manifest"]
+    end
+
+    class urirun_connector_http_check__cli__emit,urirun_connector_http_check__cli__main entry

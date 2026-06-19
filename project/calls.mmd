@@ -1,0 +1,14 @@
+flowchart LR
+%% generated in 0.00s
+    subgraph urirun_connector_http_check__cli
+        urirun_connector_http_check__cli__main["main"]
+    end
+    subgraph urirun_connector_http_check__core
+        urirun_connector_http_check__core__connector_manifest["connector_manifest"]
+        urirun_connector_http_check__core__urirun_bindings["urirun_bindings"]
+        urirun_connector_http_check__core___json_resource["_json_resource"]
+        urirun_connector_http_check__core__check_url["check_url"]
+    end
+    urirun_connector_http_check__cli__main --> urirun_connector_http_check__core__check_url
+    urirun_connector_http_check__core__connector_manifest --> urirun_connector_http_check__core___json_resource
+    urirun_connector_http_check__core__urirun_bindings --> urirun_connector_http_check__core___json_resource

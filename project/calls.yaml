@@ -1,0 +1,62 @@
+project: /home/tom/github/if-uri/urirun-connector-http-check
+generated_from: code2llm call graph analysis
+stats:
+  total_nodes: 5
+  total_edges: 3
+  modules_count: 2
+nodes:
+  urirun_connector_http_check.core.connector_manifest:
+    name: connector_manifest
+    module: urirun_connector_http_check.core
+    line: 19
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  urirun_connector_http_check.core.urirun_bindings:
+    name: urirun_bindings
+    module: urirun_connector_http_check.core
+    line: 23
+    cyclomatic_complexity: 1
+    calls_out: 1
+    calls_in: 1
+  urirun_connector_http_check.core._json_resource:
+    name: _json_resource
+    module: urirun_connector_http_check.core
+    line: 11
+    cyclomatic_complexity: 2
+    calls_out: 6
+    calls_in: 2
+  urirun_connector_http_check.cli.main:
+    name: main
+    module: urirun_connector_http_check.cli
+    line: 14
+    cyclomatic_complexity: 5
+    calls_out: 15
+    calls_in: 0
+  urirun_connector_http_check.core.check_url:
+    name: check_url
+    module: urirun_connector_http_check.core
+    line: 27
+    cyclomatic_complexity: 6
+    calls_out: 19
+    calls_in: 1
+edges:
+- caller: urirun_connector_http_check.cli.main
+  callee: urirun_connector_http_check.core.check_url
+  call_type: resolved
+- caller: urirun_connector_http_check.core.connector_manifest
+  callee: urirun_connector_http_check.core._json_resource
+  call_type: resolved
+- caller: urirun_connector_http_check.core.urirun_bindings
+  callee: urirun_connector_http_check.core._json_resource
+  call_type: resolved
+modules:
+  urirun_connector_http_check.cli:
+  - urirun_connector_http_check.cli.main
+  urirun_connector_http_check.core:
+  - urirun_connector_http_check.core._json_resource
+  - urirun_connector_http_check.core.check_url
+  - urirun_connector_http_check.core.connector_manifest
+  - urirun_connector_http_check.core.urirun_bindings
+entry_points:
+- urirun_connector_http_check.cli.main

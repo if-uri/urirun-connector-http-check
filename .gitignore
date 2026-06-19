@@ -6,3 +6,5 @@ dist/
 build/
 *.egg-info/
 .urirun/
+.code2llm_cache
+.idea

@@ -1,0 +1,32 @@
+# code2llm | 9f 317L | python:3,shell:2,json:2,toml:1 | 2026-06-19
+# generated in 0.00s
+# CC̅=2.7 | critical:0/6 | dups:0 | cycles:0
+
+HEALTH[0]: ok
+
+REFACTOR[0]: none needed
+
+PIPELINES[1]:
+  [1] Src [main]: main → check_url
+      PURITY: 100% pure
+
+LAYERS:
+  urirun_connector_http_check/    CC̄=2.7    ←in:0  →out:0
+  │ core                        66L  0C    4m  CC=6      ←1
+  │ connector.manifest.json     56L  0C    0m  CC=0.0    ←0
+  │ urirun.bindings.v2.json     43L  0C    0m  CC=0.0    ←0
+  │ cli                         41L  0C    2m  CC=5      ←0
+  │ __init__                     5L  0C    0m  CC=0.0    ←0
+  │
+  ./                              CC̄=0.0    ←in:0  →out:0
+  │ project.sh                  63L  0C    0m  CC=0.0    ←0
+  │ pyproject.toml              27L  0C    0m  CC=0.0    ←0
+  │ Makefile                    15L  0C    0m  CC=0.0    ←0
+  │ tree.sh                      1L  0C    0m  CC=0.0    ←0
+  │
+
+COUPLING: no cross-package imports detected
+
+EXTERNAL:
+  validation: run `vallm batch .` → validation.toon
+  duplication: run `redup scan .` → duplication.toon

@@ -1,0 +1,214 @@
+name: Code Quality Improvement
+project_name: ''
+project_type: prefactoring
+domain: dev-tools
+goal: Improve code quality using prefact
+goals:
+- Fix all prefact-detected issues
+- Improve code maintainability
+- Ensure consistent code style
+quality_gates:
+- metric: Prefact Issues
+  threshold: '0'
+sprints:
+- id: sprint-1
+  name: Code Quality Improvements
+  duration: 2 weeks
+  objectives:
+  - Fix code quality issues
+  task_patterns:
+  - id: ticket-50e66a13
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in build/lib/urirun_connector_http_check/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - build/lib/urirun_connector_http_check/__init__.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-d1e33090
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in build/lib/urirun_connector_http_check/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - build/lib/urirun_connector_http_check/__init__.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a6b9e487
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in tests/test_http_check.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - tests/test_http_check.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-1a31691b
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in build/lib/urirun_connector_http_check/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - build/lib/urirun_connector_http_check/cli.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-edc92277
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in build/lib/urirun_connector_http_check/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - build/lib/urirun_connector_http_check/cli.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0bac07a7
+    name: Fix ai-boilerplate issues
+    description: Resolve 1 ai-boilerplate issues in build/lib/urirun_connector_http_check/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - build/lib/urirun_connector_http_check/cli.py
+    rule_id: ai-boilerplate
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-467454ba
+    name: Fix duplicate-imports issues
+    description: Resolve 2 duplicate-imports issues in build/lib/urirun_connector_http_check/core.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - build/lib/urirun_connector_http_check/core.py
+    rule_id: duplicate-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ad4ca1eb
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in build/lib/urirun_connector_http_check/core.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - build/lib/urirun_connector_http_check/core.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0d6c2658
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in urirun_connector_http_check/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - urirun_connector_http_check/__init__.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-1cb86b50
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in urirun_connector_http_check/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - urirun_connector_http_check/__init__.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9adceca0
+    name: Fix duplicate-imports issues
+    description: Resolve 2 duplicate-imports issues in urirun_connector_http_check/core.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - urirun_connector_http_check/core.py
+    rule_id: duplicate-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e4e6851c
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in urirun_connector_http_check/core.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - urirun_connector_http_check/core.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-66fd4e6a
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in urirun_connector_http_check/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - urirun_connector_http_check/cli.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ad907185
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in urirun_connector_http_check/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - urirun_connector_http_check/cli.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ae3ab1a8
+    name: Fix ai-boilerplate issues
+    description: Resolve 1 ai-boilerplate issues in urirun_connector_http_check/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - urirun_connector_http_check/cli.py
+    rule_id: ai-boilerplate
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced

@@ -1,0 +1,31 @@
+# urirun-connector-http-check | 7f 240L | python:4,shell:2,less:1 | 2026-06-19
+# stats: 9 func | 0 cls | 7 mod | CC̄=2.8 | critical:0 | cycles:0
+# alerts[5]: CC check_url=6; CC main=5; CC test_manifest_shape=3; CC test_bindings_shape=3; CC test_cli_manifest=3
+# hotspots[5]: check_url fan=10; main fan=9; _json_resource fan=6; test_cli_manifest fan=2; emit fan=2
+# evolution: baseline
+# Keys: M=modules, D=details, i=imports, e=exports, c=classes, f=functions, m=methods
+M[7]:
+  app.doql.less,38
+  project.sh,63
+  tests/test_http_check.py,22
+  tree.sh,2
+  urirun_connector_http_check/__init__.py,6
+  urirun_connector_http_check/cli.py,42
+  urirun_connector_http_check/core.py,67
+D:
+  tests/test_http_check.py:
+    e: test_manifest_shape,test_bindings_shape,test_cli_manifest
+    test_manifest_shape()
+    test_bindings_shape()
+    test_cli_manifest(capsys)
+  urirun_connector_http_check/__init__.py:
+  urirun_connector_http_check/cli.py:
+    e: emit,main
+    emit(payload)
+    main(argv)
+  urirun_connector_http_check/core.py:
+    e: _json_resource,connector_manifest,urirun_bindings,check_url
+    _json_resource(name)
+    connector_manifest()
+    urirun_bindings()
+    check_url(url;timeout;expect_status)

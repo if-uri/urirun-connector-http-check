@@ -1,0 +1,45 @@
+source: code2llm
+# generated in 0.00s
+schema: code2llm.planfile_tickets.v1
+project_root: /home/tom/github/if-uri/urirun-connector-http-check
+tickets:
+- signal: code2llm_smell_god_function
+  title: 'Address code smell: God Function: check_url'
+  description: 'code2llm reports `God Function: check_url` in `urirun_connector_http_check/core.py:27`.
+
+
+    Function ''check_url'' is oversized: CC=6, fan-out=13, mutations=15.
+
+
+    Make the smallest refactor that removes the smell and run local tests.'
+  priority: normal
+  labels:
+  - llm-ready
+  - code2llm
+  - code-smell
+  - god-function
+  files:
+  - urirun_connector_http_check/core.py
+  dedupe_key: 'code2llm:smell:god_function:urirun_connector_http_check/core.py:27:God
+    Function: check_url'
+- signal: code2llm_smell_god_function
+  title: 'Address code smell: God Function: main'
+  description: 'code2llm reports `God Function: main` in `urirun_connector_http_check/cli.py:14`.
+
+
+    Function ''main'' is oversized: CC=5, fan-out=9, mutations=12.
+
+
+    Make the smallest refactor that removes the smell and run local tests.'
+  priority: normal
+  labels:
+  - llm-ready
+  - code2llm
+  - code-smell
+  - god-function
+  files:
+  - urirun_connector_http_check/cli.py
+  dedupe_key: 'code2llm:smell:god_function:urirun_connector_http_check/cli.py:14:God
+    Function: main'
+applied: []
+skipped: []
