@@ -12,6 +12,7 @@ hand-written bindings file.
 - Hub page: [connect.ifuri.com/connectors/http-check](https://connect.ifuri.com/connectors/http-check)
 - Machine manifest: [connect.ifuri.com/connectors/http-check.json](https://connect.ifuri.com/connectors/http-check.json)
 - Connector docs: [docs.ifuri.com/connectors.html](https://docs.ifuri.com/connectors.html)
+- Authoring guide: [docs.ifuri.com/connector-authoring.html](https://docs.ifuri.com/connector-authoring.html)
 - Registry model: [docs.ifuri.com/registry-and-bindings.html](https://docs.ifuri.com/registry-and-bindings.html)
 - Work summary: [if-uri/docs/work-summary-2026-06-20.md](https://github.com/if-uri/docs/blob/main/work-summary-2026-06-20.md)
 - Examples: [if-uri/examples](https://github.com/if-uri/examples)
