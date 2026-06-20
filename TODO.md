@@ -9,6 +9,11 @@
 - [ ] Add more URI routes for common website checks, for example response time
   thresholds, TLS expiry and required text checks.
 - [ ] Add example flows that combine `httpcheck://` with `planfile://` task
-  updates and `log://` routes.
+      updates and `log://` routes.
+- [ ] Add an example flow that runs `httpcheck://` from a host against a node in
+      `if-uri/examples/11-novnc_lan_flow`.
 - [ ] Keep the hub manifest and package manifest in sync through a small CI
-  check.
+      check.
+
+Current cross-repository status:
+https://github.com/if-uri/docs/blob/main/work-summary-2026-06-20.md

@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Added
+- Link README and TODO to the current cross-repository work summary and examples
+  repository.
+- Add a TODO for host/node example coverage using `httpcheck://`.
+
 ## [0.1.5] - 2026-06-20
 
 ### Changed

@@ -13,6 +13,8 @@ hand-written bindings file.
 - Machine manifest: [connect.ifuri.com/connectors/http-check.json](https://connect.ifuri.com/connectors/http-check.json)
 - Connector docs: [docs.ifuri.com/connectors.html](https://docs.ifuri.com/connectors.html)
 - Registry model: [docs.ifuri.com/registry-and-bindings.html](https://docs.ifuri.com/registry-and-bindings.html)
+- Work summary: [if-uri/docs/work-summary-2026-06-20.md](https://github.com/if-uri/docs/blob/main/work-summary-2026-06-20.md)
+- Examples: [if-uri/examples](https://github.com/if-uri/examples)
 
 ## Install from GitHub
 
@@ -115,3 +117,5 @@ The Docker smoke test verifies:
 - `urirun run httpcheck://host/http/query/status`,
 - MCP tools projection,
 - A2A card projection.
+
+Repository notes: [TODO.md](TODO.md) · [CHANGELOG.md](CHANGELOG.md)
