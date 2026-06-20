@@ -8,6 +8,8 @@
 - Link README and TODO to the current cross-repository work summary and examples
   repository.
 - Add a TODO for host/node example coverage using `httpcheck://`.
+- Expose `urirun_bindings()` through the `urirun.bindings` entry-point group
+  and document `urirun discover` / `urirun list --entry-points`.
 
 ### Changed
 - Point active runtime dependency and docs links at `github.com/if-uri/urirun`.

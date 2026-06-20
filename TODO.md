@@ -2,8 +2,8 @@
 
 ## Next connector improvements
 
-- [ ] Add a stable `urirun` entry-point group once core supports
-  `urirun connectors list/install`.
+- [x] Expose `urirun_bindings()` through the stable `urirun.bindings`
+  entry-point group.
 - [ ] Add a GitHub Actions workflow that runs tests, `make docker-test`, builds a wheel and proves
   installation from `git+https://github.com/if-uri/urirun-connector-http-check.git@v0.1.5`.
 - [ ] Add this connector to IFURI-016 full host-node Docker matrix with

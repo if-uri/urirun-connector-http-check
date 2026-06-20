@@ -83,6 +83,14 @@ urirun run httpcheck://host/http/query/status registry.json \
   --allow 'httpcheck://host/*'
 ```
 
+After installation, `urirun` can discover this connector automatically through
+the `urirun.bindings` entry-point group:
+
+```bash
+urirun discover --out connectors.bindings.json --registry-out connectors.registry.json
+urirun list --entry-points
+```
+
 Adopt the console script as a generic `cli://` route:
 
 ```bash
