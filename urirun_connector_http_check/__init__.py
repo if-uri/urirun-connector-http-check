@@ -1,3 +1,6 @@
+# Author: Tom Sapletta · https://tom.sapletta.com
+# Part of the ifURI solution.
+
 from __future__ import annotations
 
 from .core import CONNECTOR_ID, check_url, connector_manifest, urirun_bindings
