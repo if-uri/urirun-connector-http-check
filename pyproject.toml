@@ -24,6 +24,9 @@ Repository = "https://github.com/if-uri/urirun-connector-http-check"
 [project.scripts]
 urirun-http-check = "urirun_connector_http_check.cli:main"
 
+[project.entry-points."urirun.bindings"]
+http-check = "urirun_connector_http_check:urirun_bindings"
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["urirun_connector_http_check*"]

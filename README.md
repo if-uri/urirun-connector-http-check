@@ -20,7 +20,7 @@ hand-written bindings file.
 ## Install from GitHub
 
 ```bash
-python3 -m pip install "git+https://github.com/if-uri/urirun-connector-http-check.git@v0.1.4"
+python3 -m pip install "git+https://github.com/if-uri/urirun-connector-http-check.git@v0.1.5"
 ```
 
 Or install through the public connector hub:

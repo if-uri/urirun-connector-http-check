@@ -3,9 +3,15 @@
 ## [Unreleased]
 
 ### Added
+- Add structure-audit follow-up tasks for IFURI-016 matrix coverage and richer
+  connector contract documentation.
 - Link README and TODO to the current cross-repository work summary and examples
   repository.
 - Add a TODO for host/node example coverage using `httpcheck://`.
+
+### Changed
+- Point active runtime dependency and docs links at `github.com/if-uri/urirun`.
+- Update the README GitHub install command to the current `v0.1.5` tag.
 
 ## [0.1.5] - 2026-06-20
 
