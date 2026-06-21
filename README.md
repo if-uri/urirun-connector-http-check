@@ -128,3 +128,7 @@ The Docker smoke test verifies:
 - A2A card projection.
 
 Repository notes: [TODO.md](TODO.md) · [CHANGELOG.md](CHANGELOG.md)
+
+## License
+
+Released under the terms in [LICENSE](LICENSE).
