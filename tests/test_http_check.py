@@ -1,74 +1,86 @@
 # Author: Tom Sapletta · https://tom.sapletta.com
 # Part of the ifURI solution.
 
+"""http-check connector: one isolated @handler route. The binding is
+registry-portable (runs out-of-process via ``python -m urirun.exec``); it
+executes from a serialized -> compiled registry, and ``check_url`` stays a
+reusable in-process helper."""
 from __future__ import annotations
 
 import json
-import importlib
 
 import urirun
-from urirun_connector_http_check import connector_manifest, urirun_bindings
-from urirun_connector_http_check.cli import main
+from urirun import v2
+from urirun_connector_http_check import (
+    check_url,
+    connector_manifest,
+    core,
+    main,
+    status,
+    urirun_bindings,
+)
+
+ROUTE = "httpcheck://host/http/query/status"
 
 
-def _compile_registry(bindings: dict):
-    compile_registry = getattr(urirun, "compile_registry", None)
-    list_routes = getattr(urirun, "list_routes", None)
-    if compile_registry is not None and list_routes is not None:
-        registry = compile_registry(bindings)
-        return registry, list_routes(registry)
-    v2 = importlib.import_module("urirun.v2")
-
-    registry = v2.compile_registry(bindings)
-    return registry, v2.list_routes(registry)
+def test_status_calls_check_url(monkeypatch) -> None:
+    monkeypatch.setattr(
+        core,
+        "check_url",
+        lambda url, timeout=10.0, expect_status=None: {"ok": True, "url": url, "status": expect_status},
+    )
+    out = status(url="https://x", expectStatus=200, timeout=5.0)
+    assert out == {"ok": True, "url": "https://x", "status": 200}
 
 
-def test_manifest_shape() -> None:
-    manifest = connector_manifest()
-    assert manifest["id"] == "http-check"
-    assert "httpcheck://host/http/query/status" in manifest["routes"]
+def test_check_url_reports_network_error() -> None:
+    r = check_url("http://127.0.0.1:9/never", timeout=0.2)
+    assert r["ok"] is False and r["status"] is None and r["error"]
 
 
-def test_bindings_shape() -> None:
-    bindings = urirun_bindings()
-    assert bindings["version"] == "urirun.bindings.v2"
-    route = bindings["bindings"]["httpcheck://host/http/query/status"]
-    assert route["argv"] == [
-        "urirun-http-check",
-        "status",
-        "{url}",
-        "--expect-status",
-        "{expectStatus}",
-        "--timeout",
-        "{timeout}",
-    ]
-    assert route["inputSchema"]["required"] == ["url"]
-    assert route["inputSchema"]["properties"]["expectStatus"]["default"] == 200
+def test_bindings_are_isolated_handler() -> None:
+    b = urirun_bindings()["bindings"][ROUTE]
+    # registry-portable: runs out-of-process via urirun.exec
+    assert b["adapter"] == "local-function-subprocess"
+    assert b["python"]["module"] == "urirun_connector_http_check.core"
+    assert b["python"]["export"] == "status"
+    assert "argv" not in b
+    json.dumps(urirun_bindings())  # serializable: no live ref leaks
 
 
-def test_bindings_are_json_serializable_and_compile() -> None:
-    bindings = urirun_bindings()
-    json.dumps(bindings)
-    _registry, routes = _compile_registry(bindings)
-    assert any(route["uri"] == "httpcheck://host/http/query/status" for route in routes)
+def test_runtime_executes_from_compiled_registry() -> None:
+    # the whole point: a serialized->compiled registry still runs the route, with the
+    # handler hydrated from python:{module,export} and executed OUT-OF-PROCESS via
+    # ``python -m urirun.exec`` — no argv shim, no _exec.py. We target an unroutable
+    # host so the subprocess returns a structured network-error result instead of
+    # touching the real network; the route itself still ran (env ok, exitCode 0).
+    registry = urirun.compile_registry(json.loads(json.dumps(urirun_bindings())))
+    env = v2.run(
+        ROUTE,
+        registry,
+        payload={"url": "http://127.0.0.1:9/never", "expectStatus": 200, "timeout": 0.5},
+        mode="execute",
+        policy=urirun.policy(allow=["httpcheck://*"]),
+    )
+    assert env["ok"] is True  # route dispatched + ran out-of-process
+    assert env["adapter"] == "local-function-subprocess"
+    assert env["result"]["isolated"] is True and env["result"]["exitCode"] == 0
+    data = urirun.result_data(env)
+    # ok:true (or ok:false network-error) — either way it's a structured check_url result
+    assert data["ok"] is False and data["status"] is None and data["error"]
+    assert data["url"] == "http://127.0.0.1:9/never"
 
 
-def test_bindings_export_only_this_connector_routes() -> None:
-    @urirun.command("other://local/example/run")
-    def other_command(name: str) -> list[str]:
-        return ["echo", "{name}"]
-
-    bindings = urirun_bindings()
-    assert "httpcheck://host/http/query/status" in bindings["bindings"]
-    assert "other://local/example/run" not in bindings["bindings"]
+def test_manifest_prose_plus_derived() -> None:
+    m = connector_manifest()
+    assert m["id"] == "http-check"
+    assert m["routes"] == [ROUTE]
+    assert m["uriSchemes"] == ["httpcheck"]
+    assert m["summary"]  # prose preserved
 
 
-def test_cli_manifest(capsys) -> None:
-    assert main(["manifest"]) == 0
-    assert '"id": "http-check"' in capsys.readouterr().out
-
-
-def test_cli_bindings_are_generated(capsys) -> None:
+def test_cli_bindings_and_manifest(capsys) -> None:
     assert main(["bindings"]) == 0
-    output = json.loads(capsys.readouterr().out)
-    assert "httpcheck://host/http/query/status" in output["bindings"]
+    assert ROUTE in json.loads(capsys.readouterr().out)["bindings"]
+    assert main(["manifest"]) == 0
+    assert json.loads(capsys.readouterr().out)["id"] == "http-check"

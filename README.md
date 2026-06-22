@@ -3,9 +3,12 @@
 Small ifuri/urirun connector that checks HTTP endpoints and exposes the action
 as a package, CLI and URI binding.
 
-The URI binding is generated from a decorated Python function, so the command
-template and JSON Schema stay in one place instead of being duplicated in a
-hand-written bindings file.
+The route is declared once as a single `@handler(isolated=True)` Python function:
+the typed signature is the JSON Schema and the body is the work. There is no argv
+template, no `_exec.py` shim and no hand-written bindings file. `isolated=True`
+runs the route out-of-process through the shared `python -m urirun.exec` runner,
+so the binding stays registry-portable — it executes from a compiled/served
+registry with only the package importable.
 
 ## Documentation
 
@@ -48,23 +51,20 @@ Primary route:
 httpcheck://host/http/query/status
 ```
 
-The package exposes `urirun_bindings()`, generated from a connector-local
-decorator. The connector id and URI scheme are declared once; the function
-signature becomes the JSON Schema and the function body returns the argv
-template:
+The package exposes `urirun_bindings()`, derived from a single connector-local
+`@handler`. The connector id and URI scheme are declared once; the function
+signature becomes the JSON Schema and the function body does the work.
+`isolated=True` makes the route run out-of-process via `python -m urirun.exec`,
+so the binding is registry-portable (adapter `local-function-subprocess`):
 
 ```python
 import urirun
 
-connector = urirun.connector("http-check", scheme="httpcheck")
+conn = urirun.connector("http-check", scheme="httpcheck")
 
-@connector.command("http/query/status")
-def status_command(url: str, expectStatus: int = 200, timeout: float = 10.0):
-    return [
-        "urirun-http-check", "status", "{url}",
-        "--expect-status", "{expectStatus}",
-        "--timeout", "{timeout}",
-    ]
+@conn.handler("http/query/status", isolated=True, meta={"label": "Check HTTP status"})
+def status(url: str, expectStatus: int = 200, timeout: float = 10.0) -> dict:
+    return check_url(url, timeout=timeout, expect_status=expectStatus)
 ```
 
 Generate bindings and compile them into a registry:
