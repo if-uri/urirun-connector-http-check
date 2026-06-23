@@ -33,5 +33,14 @@
     "name": "if-uri",
     "url": "https://ifuri.com",
     "github": "https://github.com/if-uri"
-  }
+  },
+  "routes": [
+    "httpcheck://host/http/query/status"
+  ],
+  "uriSchemes": [
+    "httpcheck"
+  ],
+  "adapterKinds": [
+    "local-function"
+  ]
 }
