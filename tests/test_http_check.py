@@ -88,16 +88,11 @@ def test_cli_bindings_and_manifest(capsys) -> None:
 
 def test_contract_output_shape() -> None:
     """Live output from a network-error call must satisfy the declared out-schema."""
-    import importlib.util, sys
-    sys.path.insert(0, "/home/tom/github/if-uri/urirun-contract")
-    from urirun_connectors_toolkit.contract_gate import validate_output
-    spec = importlib.util.spec_from_file_location(
-        "contracts_http_check",
-        "/home/tom/github/if-uri/urirun-connector-http-check/urirun_connector_http_check/contracts.py",
-    )
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
+    from urirun_connectors_toolkit.contract_gate import conform, validate_output
+    from urirun_connector_http_check.contracts import CONTRACTS
+
+    conform(CONTRACTS)
 
     # Use an unreachable address so no real network is required; error path is enough.
     result = check_url("http://127.0.0.1:9/never", timeout=0.2)
-    validate_output(mod.CONTRACTS["http/query/status"], result)
+    validate_output(CONTRACTS["http/query/status"], result)
